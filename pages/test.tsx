@@ -7,25 +7,25 @@ export default function test() {
   return (
     <FlexGridWrap>
       <FlexGrid>
-        <span>One column default</span>
+        <div>One column default</div>
       </FlexGrid>
 
       <FlexGrid>
-        <span>Half column 1</span>
-        <span>Half column 2</span>
+        <div>Half column 1</div>
+        <div>Half column 2</div>
       </FlexGrid>
 
       <FlexGrid>
-        <span>3-col 1</span>
-        <span>3-col 2</span>
-        <span>3-col 3</span>
+        <div>3-col 1</div>
+        <div>3-col 2</div>
+        <div>3-col 3</div>
       </FlexGrid>
 
       <FlexGrid>
-        <span>4-col 1</span>
-        <span>4-col 2</span>
-        <span>4-col 3</span>
-        <span>4-col 4</span>
+        <div>4-col 1</div>
+        <div>4-col 2</div>
+        <div>4-col 3</div>
+        <div>4-col 4</div>
       </FlexGrid>
     </FlexGridWrap>
   );

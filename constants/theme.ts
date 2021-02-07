@@ -60,7 +60,7 @@ declare module '@material-ui/core/styles' {
 let theme = createMuiTheme({
   grid: {
     gridGap: '2rem',
-    minColumnWidth: '15rem',
+    minColumnWidth: '18rem',
   },
   typography: {
     fontFamily: 'Inter, Arial, Helvetica, sans-serif',
@@ -117,7 +117,7 @@ let theme = createMuiTheme({
           style: {
             color: 'hsl(0, 0%, 13%)',
             fontWeight: 700,
-            fontSize: '1.6rem',
+            fontSize: '1.25rem',
           },
         },
         {
@@ -125,7 +125,7 @@ let theme = createMuiTheme({
           style: {
             color: 'hsl(0, 0%, 29%)',
             fontWeight: 400,
-            fontSize: '1.4rem',
+            fontSize: '1rem',
           },
         },
         {
@@ -133,7 +133,7 @@ let theme = createMuiTheme({
           style: {
             color: 'hsl(0, 0%, 54%)',
             fontWeight: 400,
-            fontSize: '1.4rem',
+            fontSize: '0.875rem',
           },
         },
       ],

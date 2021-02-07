@@ -1,32 +1,32 @@
 import { Container, Typography } from "@material-ui/core";
 
-import { Grid, GridWrap } from "../components/Grid";
+import { BoxGrid, BoxGridWrap } from "../components/BoxGrid";
 import Layout from "../components/Layout";
 
 export default function index() {
   return (
-    <GridWrap>
-      <Grid>
-        <span>One column default</span>
-      </Grid>
+    <BoxGridWrap>
+      <BoxGrid>
+        <div>One column default</div>
+      </BoxGrid>
 
-      <Grid>
-        <span>Half column 1</span>
-        <span>Half column 2</span>
-      </Grid>
+      <BoxGrid>
+        <div>Half column 1</div>
+        <div>Half column 2</div>
+      </BoxGrid>
 
-      <Grid>
+      <BoxGrid>
         <span>3-col 1</span>
         <span>3-col 2</span>
         <span>3-col 3</span>
-      </Grid>
+      </BoxGrid>
 
-      <Grid>
+      <BoxGrid>
         <span>4-col 1</span>
         <span>4-col 2</span>
         <span>4-col 3</span>
         <span>4-col 4</span>
-      </Grid>
-    </GridWrap>
+      </BoxGrid>
+    </BoxGridWrap>
   );
 }
