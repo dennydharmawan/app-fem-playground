@@ -1,20 +1,20 @@
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
 
 // https://material-ui.com/customization/palette/
-declare module '@material-ui/core/styles/createPalette' {
-  interface Palette {
-    spaceCadet: React.CSSProperties['color'];
-    purpleNavy: React.CSSProperties['color'];
-    cornflowerBlue: React.CSSProperties['color'];
-    softWhite: React.CSSProperties['color'];
-  }
-  interface PaletteOptions {
-    spaceCadet: React.CSSProperties['color'];
-    purpleNavy: React.CSSProperties['color'];
-    cornflowerBlue: React.CSSProperties['color'];
-    softWhite: React.CSSProperties['color'];
-  }
-}
+// declare module '@material-ui/core/styles/createPalette' {
+//   interface Palette {
+//     spaceCadet: React.CSSProperties['color'];
+//     purpleNavy: React.CSSProperties['color'];
+//     cornflowerBlue: React.CSSProperties['color'];
+//     softWhite: React.CSSProperties['color'];
+//   }
+//   interface PaletteOptions {
+//     spaceCadet: React.CSSProperties['color'];
+//     purpleNavy: React.CSSProperties['color'];
+//     cornflowerBlue: React.CSSProperties['color'];
+//     softWhite: React.CSSProperties['color'];
+//   }
+// }
 
 declare module '@material-ui/core/styles/createPalette' {
   interface Palette {
@@ -29,30 +29,29 @@ declare module '@material-ui/core/Typography/Typography' {
   interface TypographyPropsVariantOverrides {
     dark: true;
     grey: true;
-    lightGrey: true;
+    light: true;
   }
 }
 
 declare module '@material-ui/core/Button/Button' {
   interface ButtonPropsColorOverrides {
-    accent: true;
     grey: true;
     light: true;
   }
 }
-
 declare module '@material-ui/core/styles' {
   interface Theme {
-    grid: {
+    grid?: {
       gridGap: string;
       minColumnWidth: string;
+      gridWrapperPadding: string;
     };
   }
-  // allow configuration using `createMuiTheme`
   interface ThemeOptions {
-    grid: {
+    grid?: {
       gridGap: string;
       minColumnWidth: string;
+      gridWrapperPadding: string;
     };
   }
 }
@@ -61,6 +60,7 @@ let theme = createMuiTheme({
   grid: {
     gridGap: '2rem',
     minColumnWidth: '18rem',
+    gridWrapperPadding: '2.5rem 1.5rem',
   },
   typography: {
     fontFamily: 'Inter, Arial, Helvetica, sans-serif',
@@ -78,22 +78,11 @@ let theme = createMuiTheme({
       main: '#00d4ff',
       contrastText: '#0a2540',
     },
-    spaceCadet: '#31395E',
-    purpleNavy: '#54548C',
-    cornflowerBlue: '#7899D4',
-    softWhite: '#E5EBF1',
     mode: 'light',
   },
   components: {
     MuiButton: {
       variants: [
-        {
-          props: { color: 'accent' },
-          style: {
-            backgroundColor: '#00d4ff',
-            color: '#0a2540',
-          },
-        },
         {
           props: { color: 'light' },
           style: {
@@ -129,7 +118,7 @@ let theme = createMuiTheme({
           },
         },
         {
-          props: { variant: 'lightGrey' },
+          props: { variant: 'light' },
           style: {
             color: 'hsl(0, 0%, 54%)',
             fontWeight: 400,

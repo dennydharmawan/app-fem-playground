@@ -19,25 +19,15 @@ import {
   Typography
 } from "@material-ui/core";
 import Hidden from "@material-ui/core/Hidden";
-import Step from "@material-ui/core/Step";
-import StepButton from "@material-ui/core/StepButton";
-import Stepper from "@material-ui/core/Stepper";
-import {
-  createStyles,
-  experimentalStyled,
-  makeStyles,
-  ThemeProvider
-} from "@material-ui/core/styles";
+import { experimentalStyled, makeStyles } from "@material-ui/core/styles";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import MenuIcon from "@material-ui/icons/Menu";
-import ShopIcon from "@material-ui/icons/Shop";
 import TwitterIcon from "@material-ui/icons/Twitter";
 
-import { BoxGrid, BoxGridWrap } from "../../components/BoxGrid";
 import CoffeeCard from "../../components/cofferoasters/coffeeCard";
 import FeatureCard from "../../components/cofferoasters/featureCard";
-import { FlexGrid, FlexGridWrap } from "../../components/FlexGrid";
+import { BoxGrid, FlexGrid, GridWrapper } from "../../components/CustomGrid";
 import theme from "../../constants/theme";
 
 const useStyles = makeStyles({
@@ -154,7 +144,7 @@ const subscription = () => {
         position="sticky"
         color="transparent"
         elevation={0}
-        sx={{ paddingInline: theme.grid.gridGap }}
+        sx={{ paddingInline: theme?.grid?.gridGap }}
       >
         <Container maxWidth="lg" disableGutters>
           <Toolbar disableGutters>
@@ -268,7 +258,7 @@ const subscription = () => {
         </Container>
       </AppBar>
 
-      <FlexGridWrap
+      <GridWrapper
         component="main"
         sx={{ backgroundColor: '#FDFCF7', paddingTop: 0, paddingBottom: 0 }}
       >
@@ -737,7 +727,7 @@ const subscription = () => {
             </BoxGrid>
           </Container>
         </Box>
-      </FlexGridWrap>
+      </GridWrapper>
       <Box component="footer">
         <Box
           sx={{
