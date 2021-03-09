@@ -5,7 +5,7 @@ import {
   PopperMenu,
   PopperMenuButton,
   PopperMenuContent
-} from "../components/PopperMenu";
+} from "../../components/PopperMenu";
 
 export default function test() {
   return (
