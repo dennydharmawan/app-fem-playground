@@ -8,12 +8,18 @@ import {
   RefObject,
   SetStateAction,
   useContext,
+  useEffect,
   useRef,
   useState
 } from "react";
+import { useClickAway } from "react-use";
 
-import { ClickAwayListener, Grow, Paper, Popper } from "@material-ui/core";
+import { Box, ClickAwayListener, Grow, Paper, Popper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+
+const callAll = <P extends any[]>(...fns: Array<(...a: P) => void>) => (
+  ...args: P
+) => fns.forEach((fn) => fn?.(...args));
 
 type PopperMenuContextType = {
   anchorRef: RefObject<HTMLButtonElement>;
@@ -21,7 +27,7 @@ type PopperMenuContextType = {
   setArrowRef: Dispatch<SetStateAction<HTMLSpanElement | null>>;
   open: boolean;
   handleToggle: () => void;
-  handleClose: (event: React.MouseEvent<EventTarget>) => void;
+  handleClose: (event: MouseEvent | TouchEvent) => void;
 };
 
 const PopperMenuContext = createContext<PopperMenuContextType | null>(null);
@@ -103,7 +109,16 @@ function PopperMenu({ children }: { children: ReactNode }) {
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleClose = (event: React.MouseEvent<EventTarget>) => {
+  const prevOpen = useRef(open);
+  useEffect(() => {
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current!.focus();
+    }
+
+    prevOpen.current = open;
+  }, [open]);
+
+  const handleClose = (event: MouseEvent | TouchEvent) => {
     if (
       anchorRef.current &&
       anchorRef.current.contains(event.target as HTMLElement)
@@ -133,13 +148,15 @@ function PopperMenu({ children }: { children: ReactNode }) {
 function PopperMenuButton({ children }: { children: ReactElement }) {
   const { anchorRef, handleToggle } = usePopperMenu();
 
+  const { onClick } = children.props;
+
   const props = {
     edge: 'start',
     color: 'inherit',
     ref: anchorRef,
     ['aria-haspopup']: 'true',
     ['aria-label']: 'menu',
-    onClick: handleToggle,
+    onClick: callAll(onClick, handleToggle),
   };
 
   return cloneElement(children, { ...props });
@@ -154,6 +171,11 @@ function PopperMenuContent({ children }: { children: ReactNode }) {
     setArrowRef,
     handleClose,
   } = usePopperMenu();
+
+  const menuRef = useRef(null);
+  useClickAway(menuRef, (event: MouseEvent | TouchEvent) => {
+    handleClose(event);
+  });
 
   return (
     <Popper
@@ -203,9 +225,7 @@ function PopperMenuContent({ children }: { children: ReactNode }) {
             }}
           >
             <span className={classes.arrow} ref={setArrowRef} />
-            <ClickAwayListener onClickAway={handleClose}>
-              {children}
-            </ClickAwayListener>
+            <Box ref={menuRef}>{children}</Box>
           </Paper>
         </Grow>
       )}
@@ -213,4 +233,4 @@ function PopperMenuContent({ children }: { children: ReactNode }) {
   );
 }
 
-export { PopperMenu, PopperMenuButton, PopperMenuContent };
+export { PopperMenu, PopperMenuButton, PopperMenuContent, usePopperMenu };

@@ -28,116 +28,19 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import CoffeeCard from "../../components/cofferoasters/coffeeCard";
 import FeatureCard from "../../components/cofferoasters/featureCard";
 import { BoxGrid, FlexGrid, GridWrapper } from "../../components/CustomGrid";
+import {
+  PopperMenu,
+  PopperMenuButton,
+  PopperMenuContent,
+  usePopperMenu
+} from "../../components/PopperMenu";
 import theme from "../../constants/theme";
-
-const useStyles = makeStyles({
-  appBar: {
-    display: 'flex',
-  },
-  offset: theme.mixins.toolbar,
-  popper: {
-    zIndex: 1,
-    '&[data-popper-placement*="bottom"] $arrow': {
-      top: 0,
-      left: 0,
-      marginTop: '-0.71em',
-      '&::before': {
-        transformOrigin: '0 100%',
-      },
-    },
-    '&[data-popper-placement*="top"] $arrow': {
-      bottom: 0,
-      left: 0,
-      marginBottom: '-0.71em',
-      '&::before': {
-        transformOrigin: '100% 0',
-      },
-    },
-    '&[data-popper-placement*="right"] $arrow': {
-      left: 0,
-      marginLeft: '-0.71em',
-      height: '1em',
-      width: '0.71em',
-      '&::before': {
-        transformOrigin: '100% 100%',
-      },
-    },
-    '&[data-popper-placement*="left"] $arrow': {
-      right: 0,
-      marginRight: '-0.71em',
-      height: '1em',
-      width: '0.71em',
-      '&::before': {
-        transformOrigin: '0 0',
-      },
-    },
-  },
-  arrow: {
-    overflow: 'hidden',
-    position: 'absolute',
-    width: '1em',
-    height: '0.71em' /* = width / sqrt(2) = (length of the hypotenuse) */,
-    boxSizing: 'border-box',
-    color: '#2B323A',
-    '&::before': {
-      content: '""',
-      margin: 'auto',
-      display: 'block',
-      width: '100%',
-      height: '100%',
-      backgroundColor: 'currentColor',
-      transform: 'rotate(45deg)',
-    },
-  },
-});
 
 const NavigationMenu = experimentalStyled(Button)(() => ({
   color: 'hsl(0, 0%, 29%)',
 }));
 
-interface MyTheme {
-  background: string;
-  boxShadow: string;
-}
-
 const subscription = () => {
-  const classes = useStyles();
-  const [open, setOpen] = useState(false);
-  const anchorRef = useRef<HTMLButtonElement>(null);
-  const [arrowRef, setArrowRef] = useState<HTMLSpanElement | null>(null);
-
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
-
-  function handleListKeyDown(event: React.KeyboardEvent) {
-    if (event.key === 'Tab') {
-      event.preventDefault();
-      setOpen(false);
-    }
-  }
-
-  // return focus to the button when we transitioned from !open -> open
-  const prevOpen = useRef(open);
-  useEffect(() => {
-    if (prevOpen.current === true && open === false) {
-      anchorRef.current!.focus();
-    }
-
-    prevOpen.current = open;
-  }, [open]);
-
-  const handleClose = (event: React.MouseEvent<EventTarget>) => {
-    if (
-      anchorRef.current &&
-      anchorRef.current.contains(event.target as HTMLElement)
-    ) {
-      return;
-    }
-
-    setOpen(false);
-  };
-
   return (
     <>
       <AppBar
@@ -172,85 +75,32 @@ const subscription = () => {
                   </NavigationMenu>
                 </Hidden>
                 <Hidden only={['sm', 'md', 'lg', 'xl']}>
-                  <IconButton
-                    edge="start"
-                    color="inherit"
-                    ref={anchorRef}
-                    aria-haspopup="true"
-                    aria-label="menu"
-                    onClick={handleToggle}
-                    aria-controls={open ? 'menu-list-grow' : undefined}
-                  >
-                    <MenuIcon />
-                  </IconButton>
-                  <Popper
-                    open={open}
-                    anchorEl={anchorRef.current}
-                    role="menu"
-                    transition
-                    disablePortal
-                    className={classes.popper}
-                    modifiers={[
-                      {
-                        name: 'flip',
-                        enabled: true,
-                        options: {
-                          altBoundary: true,
-                          rootBoundary: 'document',
-                          padding: 8,
-                        },
-                      },
-                      {
-                        name: 'preventOverflow',
-                        enabled: true,
-                      },
-                      {
-                        name: 'arrow',
-                        enabled: true,
-                        options: {
-                          element: arrowRef,
-                        },
-                      },
-                    ]}
-                  >
-                    {({ TransitionProps, placement }) => (
-                      <Grow
-                        {...TransitionProps}
-                        style={{
-                          transformOrigin:
-                            placement === 'bottom'
-                              ? 'center top'
-                              : 'center bottom',
-                        }}
+                  <PopperMenu>
+                    <PopperMenuButton>
+                      <IconButton
+                        edge="start"
+                        color="inherit"
+                        aria-haspopup="true"
+                        aria-label="menu"
                       >
-                        <Paper
-                          sx={{
-                            backgroundColor: '#2B323A',
-                            color: '#fff',
-                            boxShadow:
-                              '0 10px 20px hsla(0, 0%, 0.0000%, .15), 0 3px 6px hsla(0, 0%, 0.0000%, .10)',
+                        <MenuIcon />
+                      </IconButton>
+                    </PopperMenuButton>
+                    <PopperMenuContent>
+                      <MenuList id="menu-list-grow">
+                        <MenuItem
+                          onClick={() => {
+                            alert('how to close this compound component?');
+                            //TODO: we need to use control props pattern
                           }}
                         >
-                          <span className={classes.arrow} ref={setArrowRef} />
-                          <ClickAwayListener onClickAway={handleClose}>
-                            <MenuList
-                              autoFocusItem={open}
-                              id="menu-list-grow"
-                              onKeyDown={handleListKeyDown}
-                            >
-                              <MenuItem onClick={handleClose}>Home</MenuItem>
-                              <MenuItem onClick={handleClose}>
-                                About US
-                              </MenuItem>
-                              <MenuItem onClick={handleClose}>
-                                Create Your Plan
-                              </MenuItem>
-                            </MenuList>
-                          </ClickAwayListener>
-                        </Paper>
-                      </Grow>
-                    )}
-                  </Popper>
+                          Home
+                        </MenuItem>
+                        <MenuItem>About US</MenuItem>
+                        <MenuItem>Create Your Plan</MenuItem>
+                      </MenuList>
+                    </PopperMenuContent>
+                  </PopperMenu>
                 </Hidden>
               </Box>
             </Box>

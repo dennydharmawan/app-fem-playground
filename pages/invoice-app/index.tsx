@@ -89,91 +89,89 @@ function App() {
           },
         }}
       >
-        <Container maxWidth="md" disableGutters>
-          <Toolbar disableGutters>
+        <Toolbar disableGutters>
+          <Box
+            sx={{
+              display: 'flex',
+              width: '100%',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+
+              [`@media (min-width: 1100px)`]: {
+                flexDirection: 'column',
+                justifyContent: 'flex-start',
+                minHeight: '100vh',
+              },
+            }}
+          >
+            <Box
+              sx={{
+                backgroundColor: '#7D5CFA',
+                height: '64px',
+                width: '64px',
+                display: 'grid',
+                placeItems: 'center',
+                borderTopRightRadius: '0.6rem',
+                borderBottomRightRadius: '0.6rem',
+              }}
+            >
+              Inv
+            </Box>
+
             <Box
               sx={{
                 display: 'flex',
-                width: '100%',
                 alignItems: 'center',
-                justifyContent: 'space-between',
+                color: 'fff',
 
                 [`@media (min-width: 1100px)`]: {
                   flexDirection: 'column',
-                  justifyContent: 'flex-start',
-                  minHeight: '100vh',
+                  marginLeft: 0,
+                  marginTop: 'auto',
                 },
               }}
             >
               <Box
                 sx={{
-                  backgroundColor: '#7D5CFA',
-                  height: '64px',
-                  width: '64px',
-                  display: 'grid',
-                  placeItems: 'center',
-                  borderTopRightRadius: '0.6rem',
-                  borderBottomRightRadius: '0.6rem',
-                }}
-              >
-                Inv
-              </Box>
-
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  color: 'fff',
-
+                  paddingInline: '1rem',
                   [`@media (min-width: 1100px)`]: {
-                    flexDirection: 'column',
-                    marginLeft: 0,
-                    marginTop: 'auto',
+                    paddingInline: 0,
                   },
                 }}
               >
-                <Box
-                  sx={{
-                    paddingInline: '1rem',
-                    [`@media (min-width: 1100px)`]: {
-                      paddingInline: 0,
-                    },
-                  }}
-                >
-                  <IconButton sx={{ color: '#fff' }}>
-                    <LightModeIcon />
-                  </IconButton>
-                </Box>
+                <IconButton sx={{ color: '#fff' }}>
+                  <LightModeIcon />
+                </IconButton>
+              </Box>
 
-                <Divider
-                  orientation="vertical"
-                  flexItem
-                  sx={{
-                    backgroundColor: '#fff',
-                    [`@media (min-width: 1100px)`]: {
-                      // change orientation to horizontal
-                      borderRightWidth: 0,
-                      borderBottomWidth: 'thin',
-                    },
-                  }}
-                />
+              <Divider
+                orientation="vertical"
+                flexItem
+                sx={{
+                  backgroundColor: '#fff',
+                  [`@media (min-width: 1100px)`]: {
+                    // change orientation to horizontal
+                    borderRightWidth: 0,
+                    borderBottomWidth: 'thin',
+                  },
+                }}
+              />
 
-                <Box
-                  sx={{
-                    paddingInline: '1rem',
-                    [`@media (min-width: 1100px)`]: {
-                      paddingInline: '0rem',
-                    },
-                  }}
-                >
-                  <IconButton>
-                    <Avatar>M</Avatar>
-                  </IconButton>
-                </Box>
+              <Box
+                sx={{
+                  paddingInline: '1rem',
+                  [`@media (min-width: 1100px)`]: {
+                    paddingInline: '0rem',
+                  },
+                }}
+              >
+                <IconButton>
+                  <Avatar>M</Avatar>
+                </IconButton>
               </Box>
             </Box>
-          </Toolbar>
-        </Container>
+          </Box>
+        </Toolbar>
       </AppBar>
       <Box
         className={classes.offset}
