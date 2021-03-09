@@ -18,10 +18,10 @@ import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
 
 declare module '@material-ui/core/styles/createPalette' {
   interface Palette {
-    accent: Palette['primary'];
+    accent?: Palette['primary'];
   }
   interface PaletteOptions {
-    accent: PaletteOptions['primary'];
+    accent?: PaletteOptions['primary'];
   }
 }
 

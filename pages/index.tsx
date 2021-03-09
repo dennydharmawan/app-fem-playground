@@ -1,11 +1,11 @@
 import { Container, Typography } from "@material-ui/core";
 
-import { BoxGrid, BoxGridWrap } from "../components/BoxGrid";
+import { BoxGrid, GridWrapper } from "../components/CustomGrid";
 import Layout from "../components/Layout";
 
 export default function index() {
   return (
-    <BoxGridWrap>
+    <GridWrapper>
       <BoxGrid>
         <div>One column default</div>
       </BoxGrid>
@@ -27,6 +27,6 @@ export default function index() {
         <span>4-col 3</span>
         <span>4-col 4</span>
       </BoxGrid>
-    </BoxGridWrap>
+    </GridWrapper>
   );
 }
